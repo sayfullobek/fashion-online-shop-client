@@ -4,6 +4,7 @@ import {CLIENT_URL} from "../utils/Utils";
 import {Dashboard} from "../pages/Dashboard";
 import {Login} from "../pages/Login";
 import {NotFoundPage} from "../pages/NotFoundPage";
+import {Category} from "../pages/Category";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path={`${CLIENT_URL}/login-handler`} element={<Login/>}/>
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
+                    <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>
                 </Route>
                 <Route path={"*"} element={<NotFoundPage/>}/>
             </Routes>
