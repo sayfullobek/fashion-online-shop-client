@@ -45,10 +45,10 @@ export const Product = () => {
         if (categoryId === "0") {
             return toast.error("Mahsulot qaysi kategoriyaga tegishli ekanini belgilang")
         }
-        if (name.trim().length <= 0) {
+        if (name.trim().length === 0) {
             return toast.error("Mahsulot nomi bo'lishi shart")
         }
-        if (price === 0) {
+        if (price <= 0) {
             return toast.error("Mahsulot narxi bo'lishi shart")
         }
         if (description.trim().length === 0) {
