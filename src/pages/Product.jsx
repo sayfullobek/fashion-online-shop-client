@@ -85,6 +85,7 @@ export const Product = () => {
     const editSalePrice = async () => {
         const data = {salePrice, about: "salePrice"}
         await EditHandler(pr.id, APP_API.product, data)
+        await getAll()
         setSalePrice(0)
     }
 
