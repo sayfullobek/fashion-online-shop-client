@@ -1,10 +1,11 @@
 import {BreadCrumb} from "../component/admin/BreadCrumb";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {DeleteHandler, EditHandler, GetHandler, SaveHandler} from "../config/service/AppService";
+import {DeleteHandler, EditHandler, GetHandler, SaveHandler, UploadPhoto} from "../config/service/AppService";
 import {APP_API} from "../config/AppApi";
 import {Loading} from "../component/Loading";
 import empty from "../assets/empty.jpg"
+import {Carous} from "../component/Carous";
 
 export const Product = () => {
     const [name, setName] = useState('')
@@ -78,15 +79,26 @@ export const Product = () => {
         } else if (status === "salePrice") {
             setSalePrice(des.salePrice)
             setPr(des)
+        } else if (status === "photo") {
+            setPr(des)
         }
         setStatus(status)
     }
-
     const editSalePrice = async () => {
         const data = {salePrice, about: "salePrice"}
         await EditHandler(pr.id, APP_API.product, data)
         await getAll()
         setSalePrice(0)
+    }
+
+    const photoSave = async () => {
+        const formData = new FormData();
+        let ph = document.getElementById("img")
+        formData.append("photo", ph.files[0])
+        const photoId = await UploadPhoto(formData)
+        const data = {photoId, about: "photo"}
+        await EditHandler(pr.id, APP_API.product, data)
+        await getAll()
     }
 
     return (
@@ -149,6 +161,34 @@ export const Product = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="modal fade" id="exampleModalImg" tabIndex="-1" aria-labelledby="exampleModalLabelImg"
+                 aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabelImg">Mahsulot Rasmini
+                                saqlash</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"/>
+                        </div>
+                        <div className="modal-body">
+                            <div className="mb-3">
+                                <label htmlFor={"img"} className="form-label">Mahsulotning Rasmini kiriting</label>
+                                <input type={"file"}
+                                       className="form-control" id="img"
+                                       placeholder={"Mahsulotning chegirmaliy narxini kiriting"}/>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
+                            <button type="button" className="btn btn-primary"
+                                    onClick={() => photoSave()}>Saqlash
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -158,6 +198,16 @@ const GetProduct = (
         products, getAll, seeDescription
     }
 ) => {
+    const ButtonGroup = ({next, previous, goToSlide, ...rest}) => {
+        const {carouselState: {currentSlide}} = rest;
+        return (
+            <div className="carousel-button-group">
+                <button className={currentSlide === 0 ? 'btn disable' : 'btn'} onClick={() => previous()}/>
+                <button className={"btn"} onClick={() => next()}/>
+                <button className={"btn"} onClick={() => goToSlide(currentSlide + 1)}> Go to any slide</button>
+            </div>
+        );
+    };
     return (
         <div className={"row mt-3 m-1"}>
             {products.map(item => (
@@ -166,7 +216,7 @@ const GetProduct = (
                         {item.photoId.length === 0 ? (
                             <img width={"100%"} height={"200px"} src={empty} alt="1"/>
                         ) : (
-                            <img width={"100%"} height={"200px"} src={`${APP_API.download}${item.photoId}`} alt="1"/>
+                            <Carous item={item}/>
                         )}
                         <h5 className={"text-start mt-3"}>
                             {item.name}
@@ -191,7 +241,10 @@ const GetProduct = (
                                     data-bs-target="#exampleModal"
                                     onClick={() => seeDescription(item.description, "seeDescription")}><i
                                 className="bi bi-journal-arrow-up"/></button>
-                            <button className={"btn btn-success"}><i className="bi bi-image"/></button>
+                            <button className={"btn btn-success"}
+                                    onClick={() => seeDescription(item, "photo")}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalImg"><i className="bi bi-image"/></button>
                             <button className={"btn btn-warning"}><i className="bi bi-pencil-square"/></button>
                             <button className={"btn btn-danger"}
                                     onClick={() => DeleteHandler(APP_API.product, item.id, getAll)}><i

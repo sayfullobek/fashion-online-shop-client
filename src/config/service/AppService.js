@@ -21,6 +21,7 @@ export const EditHandler = async (id, api, data) => {
             toast.success("Muvaffaqiyatli Taxrirlandi")
         }
     } catch (err) {
+        console.log(err)
         toast.error("Taxrirlashda xatolik")
     }
 }
@@ -43,7 +44,9 @@ export const DeleteHandler = async (api, id, getAll) => {
         try {
             await BASE_CONFIG.doDelete(api, id)
             toast.success("Muvaffaqiyatli o'chirildi")
-            await getAll()
+            if (getAll) {
+                await getAll()
+            }
         } catch (err) {
             toast.error("O'chirishda xatolik")
         }

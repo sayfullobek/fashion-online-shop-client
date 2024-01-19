@@ -8,3 +8,27 @@ export const SIDE_ARR = [
     {name: 'So\'rovlar', url: `${CLIENT_URL}/request`, logo: 'bi bi-clipboard-plus-fill'},
     {name: 'Sozlamalar', url: `${CLIENT_URL}/settings`, logo: 'bi bi-gear-fill'},
 ]
+
+export const RESPONSIVE = {
+    desktop: {
+        breakpoint: {
+            max: 3000,
+            min: 1024
+        },
+        items: 1
+    },
+    mobile: {
+        breakpoint: {
+            max: 464,
+            min: 0
+        },
+        items: 1
+    },
+    tablet: {
+        breakpoint: {
+            max: 1024,
+            min: 464
+        },
+        items: 1
+    }
+}
