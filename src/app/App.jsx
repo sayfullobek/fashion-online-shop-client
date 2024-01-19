@@ -5,6 +5,8 @@ import {Dashboard} from "../pages/Dashboard";
 import {Login} from "../pages/Login";
 import {NotFoundPage} from "../pages/NotFoundPage";
 import {Category} from "../pages/Category";
+import {Product} from "../pages/Product";
+import {Requests} from "../pages/Requests";
 
 function App() {
     return (
@@ -14,6 +16,8 @@ function App() {
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>
+                    <Route path={`${CLIENT_URL}/product`} element={<Product/>}/>
+                    <Route path={`${CLIENT_URL}/request`} element={<Requests/>}/>
                 </Route>
                 <Route path={"*"} element={<NotFoundPage/>}/>
             </Routes>
