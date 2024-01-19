@@ -3,6 +3,7 @@ import {DashboardLayout} from "../layout/DashboardLayout";
 import {CLIENT_URL} from "../utils/Utils";
 import {Dashboard} from "../pages/Dashboard";
 import {Login} from "../pages/Login";
+import {NotFoundPage} from "../pages/NotFoundPage";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
                 </Route>
+                <Route path={"*"} element={<NotFoundPage/>}/>
             </Routes>
         </BrowserRouter>
     )
