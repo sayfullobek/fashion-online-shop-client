@@ -8,7 +8,7 @@ export const BASE_CONFIG = {
     doGet: (api) => axios.get(
         `${SERVER_URL}${api}`
     ), doPost: (api, data) => axios.post(
-        `${SERVER_URL}${api}`, data, settings
+        `${SERVER_URL}${api}`, data
     ), doPut: (api, id, data) => axios.put(
         `${SERVER_URL}${api}/${id}`, data, settings
     ), doDelete: (api, id) => axios.delete(

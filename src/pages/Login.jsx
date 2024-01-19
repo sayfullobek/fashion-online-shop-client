@@ -58,6 +58,7 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
+            <div style={{width: '100%', height: '20vh'}}/>
         </section>
     )
 }
