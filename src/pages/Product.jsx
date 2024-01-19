@@ -109,7 +109,7 @@ const GetProduct = (
                                 </>
                             )}
                         </h5>
-                        <p className={"text-secondary"}>{item.description.slice(0, 36)}</p>
+                        <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
                         <div className={"w-100 d-flex align-items-center justify-content-between"}>
                             <button className={"btn btn-info"}><i className="bi bi-cash"/></button>
                             <button className={"btn btn-secondary"}><i className="bi bi-journal-arrow-up"/></button>
