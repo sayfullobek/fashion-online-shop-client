@@ -14,6 +14,8 @@ export const Product = () => {
     const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
+    const [seeDes, setSeeDes] = useState('')
+
     const formArr = {
         name: "Mahsulot saqlash",
         arr: [
@@ -67,23 +69,45 @@ export const Product = () => {
         getAll()
     }, [])
 
+    const seeDescription = (des) => {
+        setSeeDes(des)
+    }
+
     return (
         <div>
             {loading ? (
                 <>
                     <BreadCrumb name={"Kategoriyalar"} formArr={formArr} saveFunction={saveHandler}/>
-                    <GetProduct products={products} getAll={getAll}/>
+                    <GetProduct products={products} getAll={getAll} seeDescription={seeDescription}/>
                 </>
             ) : (
                 <Loading/>
             )}
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Mahsulot haqidagi ma'lumot</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"/>
+                        </div>
+                        <div className="modal-body">
+                            {seeDes}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
 const GetProduct = (
     {
-        products, getAll
+        products, getAll, seeDescription
     }
 ) => {
     return (
@@ -112,7 +136,9 @@ const GetProduct = (
                         <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
                         <div className={"w-100 d-flex align-items-center justify-content-between"}>
                             <button className={"btn btn-info"}><i className="bi bi-cash"/></button>
-                            <button className={"btn btn-secondary"}><i className="bi bi-journal-arrow-up"/></button>
+                            <button className={"btn btn-secondary"} data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" onClick={() => seeDescription(item.description)}><i
+                                className="bi bi-journal-arrow-up"/></button>
                             <button className={"btn btn-success"}><i className="bi bi-image"/></button>
                             <button className={"btn btn-warning"}><i className="bi bi-pencil-square"/></button>
                             <button className={"btn btn-danger"}
