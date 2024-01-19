@@ -13,6 +13,18 @@ export const SaveHandler = async (api, data) => {
     }
 }
 
+
+export const EditHandler = async (id, api, data) => {
+    try {
+        const res = await BASE_CONFIG.doPut(api, id, data)
+        if (res.status === 200 || res.status === 201 || res.status === 204) {
+            toast.success("Muvaffaqiyatli Taxrirlandi")
+        }
+    } catch (err) {
+        toast.error("Taxrirlashda xatolik")
+    }
+}
+
 export const GetHandler = async (api, status) => {
     try {
         const res = await BASE_CONFIG.doGet(api)
@@ -22,7 +34,6 @@ export const GetHandler = async (api, status) => {
             return res.data._embedded.list
         }
     } catch (err) {
-        console.log(err)
     }
 }
 

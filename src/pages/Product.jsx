@@ -1,7 +1,7 @@
 import {BreadCrumb} from "../component/admin/BreadCrumb";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {DeleteHandler, GetHandler, SaveHandler} from "../config/service/AppService";
+import {DeleteHandler, EditHandler, GetHandler, SaveHandler} from "../config/service/AppService";
 import {APP_API} from "../config/AppApi";
 import {Loading} from "../component/Loading";
 import empty from "../assets/empty.jpg"
@@ -16,7 +16,8 @@ export const Product = () => {
     const [categories, setCategories] = useState([])
     const [seeDes, setSeeDes] = useState('')
     const [status, setStatus] = useState('')
-    const [salePrice, setSalePrice] = useState('')
+    const [salePrice, setSalePrice] = useState(0)
+    const [pr, setPr] = useState(0)
 
     const formArr = {
         name: "Mahsulot saqlash",
@@ -76,8 +77,15 @@ export const Product = () => {
             setSeeDes(des)
         } else if (status === "salePrice") {
             setSalePrice(des.salePrice)
+            setPr(des)
         }
         setStatus(status)
+    }
+
+    const editSalePrice = async () => {
+        const data = {salePrice, status: "salePrice"}
+        await EditHandler(pr.id, APP_API.product, data)
+        setSalePrice(0)
     }
 
     return (
@@ -101,21 +109,28 @@ export const Product = () => {
                         </div>
                         <div className="modal-body">
                             {status === "seeDescription" ? (
-                                {seeDes}
+                                seeDes ? seeDes : ""
                             ) : (
                                 <div className="mb-3">
                                     <label htmlFor={"salePrice"} className="form-label">Mahsulotning chegirmaliy narxini
                                         kiriting</label>
                                     <input type={"number"}
-                                           value={salePrice}
+                                           value={pr.price >= salePrice ? salePrice : pr.price}
                                            onChange={e => setSalePrice(e.target.value)}
                                            className="form-control" id="salePrice"
                                            placeholder={"Mahsulotning chegirmaliy narxini kiriting"}/>
+                                    <div className={"mt-3"}>Mahsulotning narxi {pr.price} so'm</div>
                                 </div>
                             )}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
+                            {status === "salePrice" ? (
+                                <button type="button" className="btn btn-primary"
+                                        onClick={() => editSalePrice}>Saqlash</button>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                 </div>
