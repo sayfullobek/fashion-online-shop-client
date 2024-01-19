@@ -7,6 +7,7 @@ import {NotFoundPage} from "../pages/NotFoundPage";
 import {Category} from "../pages/Category";
 import {Product} from "../pages/Product";
 import {Requests} from "../pages/Requests";
+import {Settings} from "../pages/Settings";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>
                     <Route path={`${CLIENT_URL}/product`} element={<Product/>}/>
                     <Route path={`${CLIENT_URL}/request`} element={<Requests/>}/>
+                    <Route path={`${CLIENT_URL}/settings`} element={<Settings/>}/>
                 </Route>
                 <Route path={"*"} element={<NotFoundPage/>}/>
             </Routes>

@@ -81,6 +81,11 @@ export const Product = () => {
             setPr(des)
         } else if (status === "photo") {
             setPr(des)
+        } else if (status === "edit") {
+            setPr(des)
+            setName(des.name)
+            setPrice(des.price)
+            setDescription(des.description)
         }
         setStatus(status)
     }
@@ -99,6 +104,24 @@ export const Product = () => {
         const data = {photoId, about: "photo"}
         await EditHandler(pr.id, APP_API.product, data)
         await getAll()
+    }
+
+    const editHandlerAbout = async () => {
+        if (name.trim().length === 0) {
+            return toast.error("Mahsulot nomi bo'lishi shart")
+        }
+        if (price <= 0) {
+            return toast.error("Mahsulot narxi bo'lishi shart")
+        }
+        if (description.trim().length === 0) {
+            return toast.error("Mahsulot haqida ma'lumot bo'lishi shart")
+        }
+        const data = {name, price, description, about: "other"}
+        await EditHandler(pr.id, APP_API.product, data)
+        await getAll()
+        setName("")
+        setPrice(0)
+        setDescription("")
     }
 
     return (
@@ -189,6 +212,54 @@ export const Product = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit"
+                 aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Mahsulotni taxrirlash</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"/>
+                        </div>
+                        <div className="modal-body">
+                            <div className="mb-3">
+                                <label htmlFor={"name"} className="form-label">Mahsulot nomini qayta
+                                    kiriting</label>
+                                <input type={"text"}
+                                       value={name}
+                                       onChange={e => setName(e.target.value)}
+                                       className="form-control" id="name"
+                                       placeholder={"Mahsulot nomini qayta kiriting"}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor={"price"} className="form-label">Mahsulot narxini qayta
+                                    kiriting</label>
+                                <input type={"text"}
+                                       value={price}
+                                       onChange={e => setPrice(e.target.value)}
+                                       className="form-control" id="price"
+                                       placeholder={"Mahsulot narxini qayta kiriting"}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor={"description"} className="form-label">Mahsulot haqida ma'lumotni qayta
+                                    kiriting</label>
+                                <textarea
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                    className="form-control" id="description"
+                                    placeholder={"Mahsulot haqida ma'lumotni qayta kiriting"}/>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
+                            <button type="button" className="btn btn-primary"
+                                    onClick={() => editHandlerAbout()}>Saqlash
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -216,7 +287,7 @@ const GetProduct = (
                         {item.photoId.length === 0 ? (
                             <img width={"100%"} height={"200px"} src={empty} alt="1"/>
                         ) : (
-                            <Carous item={item}/>
+                            <Carous item={item} getAll={getAll}/>
                         )}
                         <h5 className={"text-start mt-3"}>
                             {item.name}
@@ -245,7 +316,10 @@ const GetProduct = (
                                     onClick={() => seeDescription(item, "photo")}
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModalImg"><i className="bi bi-image"/></button>
-                            <button className={"btn btn-warning"}><i className="bi bi-pencil-square"/></button>
+                            <button onClick={() => seeDescription(item, "edit")} className={"btn btn-warning"}><i
+                                className="bi bi-pencil-square"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModalEdit"/></button>
                             <button className={"btn btn-danger"}
                                     onClick={() => DeleteHandler(APP_API.product, item.id, getAll)}><i
                                 className="bi bi-trash"/>
