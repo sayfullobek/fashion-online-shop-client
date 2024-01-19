@@ -15,6 +15,8 @@ export const Product = () => {
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
     const [seeDes, setSeeDes] = useState('')
+    const [status, setStatus] = useState('')
+    const [salePrice, setSalePrice] = useState('')
 
     const formArr = {
         name: "Mahsulot saqlash",
@@ -69,8 +71,13 @@ export const Product = () => {
         getAll()
     }, [])
 
-    const seeDescription = (des) => {
-        setSeeDes(des)
+    const seeDescription = (des, status) => {
+        if (status === "seeDescription") {
+            setSeeDes(des)
+        } else if (status === "salePrice") {
+            setSalePrice(des.salePrice)
+        }
+        setStatus(status)
     }
 
     return (
@@ -93,7 +100,19 @@ export const Product = () => {
                                     aria-label="Close"/>
                         </div>
                         <div className="modal-body">
-                            {seeDes}
+                            {status === "seeDescription" ? (
+                                {seeDes}
+                            ) : (
+                                <div className="mb-3">
+                                    <label htmlFor={"salePrice"} className="form-label">Mahsulotning chegirmaliy narxini
+                                        kiriting</label>
+                                    <input type={"number"}
+                                           value={salePrice}
+                                           onChange={e => setSalePrice(e.target.value)}
+                                           className="form-control" id="salePrice"
+                                           placeholder={"Mahsulotning chegirmaliy narxini kiriting"}/>
+                                </div>
+                            )}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
@@ -135,9 +154,13 @@ const GetProduct = (
                         </h5>
                         <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
                         <div className={"w-100 d-flex align-items-center justify-content-between"}>
-                            <button className={"btn btn-info"}><i className="bi bi-cash"/></button>
+                            <button className={"btn btn-info"}><i className="bi bi-cash"
+                                                                  onClick={() => seeDescription(item, "salePrice")}
+                                                                  data-bs-toggle="modal"
+                                                                  data-bs-target="#exampleModal"/></button>
                             <button className={"btn btn-secondary"} data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" onClick={() => seeDescription(item.description)}><i
+                                    data-bs-target="#exampleModal"
+                                    onClick={() => seeDescription(item.description, "seeDescription")}><i
                                 className="bi bi-journal-arrow-up"/></button>
                             <button className={"btn btn-success"}><i className="bi bi-image"/></button>
                             <button className={"btn btn-warning"}><i className="bi bi-pencil-square"/></button>
