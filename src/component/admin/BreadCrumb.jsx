@@ -30,9 +30,29 @@ export const BreadCrumb = ({name, formArr, saveFunction}) => {
                             {item.type === "file" ? (
                                 <div className="mb-3">
                                     <label htmlFor={item.name} className="form-label">{item.name}</label>
-                                    <input type={item.type} value={item.value}
+                                    <input type={item.type}
+                                        // value={item.value}
                                            className="form-control" id="photo"
                                            placeholder={item.name}/>
+                                </div>
+                            ) : item.type === "select" ? (
+                                <div className="mb-3">
+                                    <label htmlFor={item.name} className="form-label">{item.name}</label>
+                                    <select value={item.value} onChange={e => item.setValue(e.target.value)}
+                                            className="form-control" id="photo">
+                                        <option value="0">Kategoriyani tanlang</option>
+                                        {item.arr.map(i => (
+                                            <option value={i.id}>{i.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            ) : item.type === "textarea" ? (
+                                <div className="mb-3">
+                                    <label htmlFor={item.name} className="form-label">{item.name}</label>
+                                    <textarea value={item.value}
+                                              onChange={e => item.setValue(e.target.value)}
+                                              className="form-control" id={item.name}
+                                              placeholder={item.name}/>
                                 </div>
                             ) : (
                                 <div className="mb-3">

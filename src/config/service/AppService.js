@@ -2,11 +2,10 @@ import {toast} from "react-toastify";
 import {BASE_CONFIG} from "../BaseConfig";
 import {APP_API} from "../AppApi";
 
-export const SaveHandler = async (api, data, getAll) => {
+export const SaveHandler = async (api, data) => {
     try {
         const res = await BASE_CONFIG.doPost(api, data)
         if (res.status === 200 || res.status === 201 || res.status === 204) {
-            await getAll()
             toast.success("Muvaffaqiyatli saqlandi")
         }
     } catch (err) {
@@ -23,6 +22,20 @@ export const GetHandler = async (api, status) => {
             return res.data._embedded.list
         }
     } catch (err) {
+        console.log(err)
+    }
+}
+
+export const DeleteHandler = async (api, id, getAll) => {
+    const deleteFun = window.confirm("O'chirasizmi?");
+    if (deleteFun) {
+        try {
+            await BASE_CONFIG.doDelete(api, id)
+            toast.success("Muvaffaqiyatli o'chirildi")
+            await getAll()
+        } catch (err) {
+            toast.error("O'chirishda xatolik")
+        }
     }
 }
 
