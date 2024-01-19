@@ -16,7 +16,7 @@ export const LoginHandler = async (data, navigate) => {
         if (res.status === 200 || res.status === 201 || res.status === 204) {
             toast.success("Muvaffaqiyatli xisobga kirdingiz")
             sessionStorage.setItem("__token__", res.data.token)
-            navigate(`${CLIENT_URL}/dashboard`)
+            navigate(`${CLIENT_URL}`)
         } else {
             toast.error("Username yoki parolda xatolik")
         }
