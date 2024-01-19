@@ -34,13 +34,14 @@ export const Carous = ({item}) => {
         >
             {item.photoId.map(ph => (
                 <div>
-                    <button onClick={()=>DeleteHandler(APP_API.photo, ph.id)} style={{position: 'absolute', right: '0'}} className={"btn btn-danger"}>
+                    <button onClick={() => DeleteHandler(APP_API.photo, ph.id)}
+                            style={{position: 'absolute', right: '0'}} className={"btn btn-danger"}>
                         <i className="bi bi-trash"/>
                     </button>
                     <img
                         style={{
                             display: 'block',
-                            height: '36vh',
+                            height: '29vh',
                             margin: 'auto',
                             width: '100%'
                         }}
