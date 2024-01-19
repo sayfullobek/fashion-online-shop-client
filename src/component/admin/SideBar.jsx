@@ -9,7 +9,7 @@ export const SideBar = () => {
                 <div className="list-group list-group-flush mx-3 mt-4">
                     {SIDE_ARR.map(item => (
                         <Link
-                            to={item.link}
+                            to={item.url}
                             className="list-group-item list-group-item-action py-2 ripple"
                             aria-current="true"
                         >
