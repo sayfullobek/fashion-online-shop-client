@@ -7,5 +7,8 @@ export const APP_API = {
     download: `${SERVER_URL}/attachment/download?id=`,
     category: "/category",
     product: "/product",
-    photo: '/product/photo'
+    getProductByCategoryId: "/product/category-by",
+    photo: '/product/photo',
+    settings: '/auth/settings/edit',
+    attachment: "/attachment"
 }

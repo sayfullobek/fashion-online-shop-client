@@ -287,7 +287,7 @@ const GetProduct = (
                         {item.photoId.length === 0 ? (
                             <img width={"100%"} height={"200px"} src={empty} alt="1"/>
                         ) : (
-                            <Carous item={item} getAll={getAll}/>
+                            <Carous item={item} getAll={getAll} status={"admin"}/>
                         )}
                         <h5 className={"text-start mt-3"}>
                             {item.name}

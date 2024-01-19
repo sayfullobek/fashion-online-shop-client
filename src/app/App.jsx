@@ -8,12 +8,16 @@ import {Category} from "../pages/Category";
 import {Product} from "../pages/Product";
 import {Requests} from "../pages/Requests";
 import {Settings} from "../pages/Settings";
+import {Menu} from "../pages/user/Menu";
+import {CategoryItem} from "../pages/user/CategoryItem";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={`${CLIENT_URL}/login-handler`} element={<Login/>}/>
+                <Route path={`/:chat-id`} element={<Menu/>}/>
+                <Route path={`/:chat-id/:id`} element={<CategoryItem/>}/>
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>

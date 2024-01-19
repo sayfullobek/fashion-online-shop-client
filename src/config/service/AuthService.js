@@ -26,7 +26,7 @@ export const LoginHandler = async (data, navigate) => {
 }
 
 export const GetUserMe = async () => {
-    const decode = jwtDecode(sessionStorage.getItem("token"))
+    const decode = jwtDecode(sessionStorage.getItem("__token__"))
     try {
         const res = await BASE_CONFIG.doGet(APP_API.getUserMe + "/" + decode.sub)
         return res.data

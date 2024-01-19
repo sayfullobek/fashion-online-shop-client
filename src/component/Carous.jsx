@@ -3,7 +3,7 @@ import {APP_API} from "../config/AppApi";
 import {RESPONSIVE} from "../utils/Utils";
 import {DeleteHandler} from "../config/service/AppService";
 
-export const Carous = ({item, getAll}) => {
+export const Carous = ({item, getAll, status}) => {
     return (
         <Carousel
             additionalTransfrom={0}
@@ -34,10 +34,12 @@ export const Carous = ({item, getAll}) => {
         >
             {item.photoId.map(ph => (
                 <div>
-                    <button onClick={() => DeleteHandler(APP_API.photo, ph.id, getAll)}
-                            style={{position: 'absolute', right: '0'}} className={"btn btn-danger"}>
-                        <i className="bi bi-trash"/>
-                    </button>
+                    {status === "admin" ? (
+                        <button onClick={() => DeleteHandler(APP_API.photo, ph.id, getAll)}
+                                style={{position: 'absolute', right: '0'}} className={"btn btn-danger"}>
+                            <i className="bi bi-trash"/>
+                        </button>
+                    ) : (<></>)}
                     <img
                         style={{
                             display: 'block',

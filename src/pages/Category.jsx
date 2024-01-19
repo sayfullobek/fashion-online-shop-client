@@ -1,9 +1,10 @@
 import {BreadCrumb} from "../component/admin/BreadCrumb";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {GetHandler, SaveHandler, UploadPhoto} from "../config/service/AppService";
+import {DeleteHandler, GetHandler, SaveHandler, UploadPhoto} from "../config/service/AppService";
 import {APP_API} from "../config/AppApi";
 import {Loading} from "../component/Loading";
+import {BASE_CONFIG} from "../config/BaseConfig";
 
 export const Category = () => {
     const [name, setName] = useState('')
@@ -49,12 +50,16 @@ export const Category = () => {
     useEffect(() => {
         getAll()
     }, [])
+    const deleteCategory = async (id, photoId) => {
+        await BASE_CONFIG.doDelete(APP_API.attachment, photoId)
+        await DeleteHandler(APP_API.category, id, getAll)
+    }
     return (
         <div>
             {loading ? (
                 <>
                     <BreadCrumb name={"Kategoriyalar"} formArr={formArr} saveFunction={saveHandler}/>
-                    <GetCategory categories={categories}/>
+                    <GetCategory categories={categories} deleteCategory={deleteCategory}/>
                 </>
             ) : (
                 <Loading/>
@@ -65,7 +70,7 @@ export const Category = () => {
 
 const GetCategory = (
     {
-        categories
+        categories, deleteCategory
     }
 ) => {
     return (
@@ -75,6 +80,19 @@ const GetCategory = (
                     <div className={"card w-100 p-3"}>
                         <img width={"100%"} height={"200px"} src={`${APP_API.download}${item.photoId}`} alt="1"/>
                         <h5 className={"text-start mt-3"}>{item.name}</h5>
+                        <div style={{width: '34%'}} className={"d-flex align-items-center justify-content-between"}>
+                            <button
+                                // onClick={() => seeDescription(item, "edit")}
+                                className={"btn btn-warning"}><i
+                                className="bi bi-pencil-square"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModalEdit"/></button>
+                            <button className={"btn btn-danger"}
+                                    onClick={() => deleteCategory(item.id, item.photoId)}
+                            ><i
+                                className="bi bi-trash"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
             ))}
