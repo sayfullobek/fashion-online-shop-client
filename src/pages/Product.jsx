@@ -83,7 +83,7 @@ export const Product = () => {
     }
 
     const editSalePrice = async () => {
-        const data = {salePrice, status: "salePrice"}
+        const data = {salePrice, about: "salePrice"}
         await EditHandler(pr.id, APP_API.product, data)
         setSalePrice(0)
     }
@@ -108,29 +108,42 @@ export const Product = () => {
                                     aria-label="Close"/>
                         </div>
                         <div className="modal-body">
-                            {status === "seeDescription" ? (
-                                seeDes ? seeDes : ""
-                            ) : (
-                                <div className="mb-3">
-                                    <label htmlFor={"salePrice"} className="form-label">Mahsulotning chegirmaliy narxini
-                                        kiriting</label>
-                                    <input type={"number"}
-                                           value={pr.price >= salePrice ? salePrice : pr.price}
-                                           onChange={e => setSalePrice(e.target.value)}
-                                           className="form-control" id="salePrice"
-                                           placeholder={"Mahsulotning chegirmaliy narxini kiriting"}/>
-                                    <div className={"mt-3"}>Mahsulotning narxi {pr.price} so'm</div>
-                                </div>
-                            )}
+                            {seeDes ? seeDes : ""}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
-                            {status === "salePrice" ? (
-                                <button type="button" className="btn btn-primary"
-                                        onClick={() => editSalePrice}>Saqlash</button>
-                            ) : (
-                                <></>
-                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="exampleModalSale" tabIndex="-1" aria-labelledby="exampleModalLabelSale"
+                 aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabelSale">Mahsulot chegirmali narxini
+                                saqlash</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"/>
+                        </div>
+                        <div className="modal-body">
+                            <div className="mb-3">
+                                <label htmlFor={"salePrice"} className="form-label">Mahsulotning chegirmaliy narxini
+                                    kiriting</label>
+                                <input type={"number"}
+                                       value={pr.price >= salePrice ? salePrice : pr.price}
+                                       onChange={e => setSalePrice(e.target.value)}
+                                       className="form-control" id="salePrice"
+                                       placeholder={"Mahsulotning chegirmaliy narxini kiriting"}/>
+                                <div className={"mt-3"}>Mahsulotning narxi {pr.price} so'm</div>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
+                            <button type="button" className="btn btn-primary"
+                                    onClick={() => editSalePrice()}>Saqlash
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -162,8 +175,8 @@ const GetProduct = (
                                 <>{item.price} so'm</>
                             ) : (
                                 <>
-                                    {item.salePrice} so'm
-                                    <del className={"text-danger"}>{item.price} so'm</del>
+                                    {item.price - item.salePrice} so'm
+                                    <del className={"text-danger"}> {item.price} so'm</del>
                                 </>
                             )}
                         </h5>
@@ -172,7 +185,7 @@ const GetProduct = (
                             <button className={"btn btn-info"}><i className="bi bi-cash"
                                                                   onClick={() => seeDescription(item, "salePrice")}
                                                                   data-bs-toggle="modal"
-                                                                  data-bs-target="#exampleModal"/></button>
+                                                                  data-bs-target="#exampleModalSale"/></button>
                             <button className={"btn btn-secondary"} data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                     onClick={() => seeDescription(item.description, "seeDescription")}><i
