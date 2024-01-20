@@ -10,6 +10,7 @@ import {Requests} from "../pages/Requests";
 import {Settings} from "../pages/Settings";
 import {Menu} from "../pages/user/Menu";
 import {CategoryItem} from "../pages/user/CategoryItem";
+import {Users} from "../pages/Users";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route index element={<Dashboard/>}/>
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>
                     <Route path={`${CLIENT_URL}/product`} element={<Product/>}/>
+                    <Route path={`${CLIENT_URL}/users`} element={<Users/>}/>
                     <Route path={`${CLIENT_URL}/request`} element={<Requests/>}/>
                     <Route path={`${CLIENT_URL}/settings`} element={<Settings/>}/>
                 </Route>

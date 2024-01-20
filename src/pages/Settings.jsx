@@ -72,7 +72,7 @@ export const Settings = () => {
         await getUserMe()
     }
     const editBotSettings = async () => {
-        if (chatId.trim().length === 0) {
+        if (chatId.trim().length === 0 || chatId === null) {
             return toast.error("Admin chat Id si bo'lishi shart")
         }
         if (token.trim().length === 0) {
@@ -159,29 +159,31 @@ export const Settings = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="ChatIdingizni kiriting"
-                                        value={chatId} onChange={e => setChatId(e.target.value)}/>
+                                        value={chatId}
+                                        // onChange={e => setChatId(e.target.value)}
+                                    />
                                     </div>
-                                    <div className="col-md-6"><label className="labels">Token</label><input
-                                        type="text"
-                                        className="form-control"
-                                        value={token}
-                                        onChange={e => setToken(e.target.value)}
-                                        placeholder="Tokeningizni kiriting"/>
-                                    </div>
-                                    <div className="col-md-12"><label className="labels">Bot username</label><input
+                                    <div className="col-md-6"><label className="labels">Bot username</label><input
                                         type="text"
                                         className="form-control"
                                         value={usernameBot}
-                                        onChange={e => setUserNameBot(e.target.value)}
+                                        // onChange={e => setUserNameBot(e.target.value)}
                                         placeholder="Botingizni  usernamsini kiriting"/>
                                     </div>
+                                    <div className="col-md-12"><label className="labels">Token</label><input
+                                        type="text"
+                                        className="form-control"
+                                        value={token}
+                                        // onChange={e => setToken(e.target.value)}
+                                        placeholder="Tokeningizni kiriting"/>
+                                    </div>
                                 </div>
-                                <div className="mt-3 text-center">
-                                    <button onClick={() => editBotSettings()} className="btn btn-primary profile-button"
-                                            type="button">
-                                        Saqlash
-                                    </button>
-                                </div>
+                                {/*<div className="mt-3 text-center">*/}
+                                {/*    <button onClick={() => editBotSettings()} className="btn btn-primary profile-button"*/}
+                                {/*            type="button">*/}
+                                {/*        Saqlash*/}
+                                {/*    </button>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                         <div className="col-md-4 mt-5">
