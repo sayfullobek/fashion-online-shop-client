@@ -51,32 +51,36 @@ export const Menu = () => {
                 </div>
                 <div className={"row mt-3 m-1"}>
                     {products.map(item => (
-                        <div className={"col-12 col-sm-6 col-md-3 p-2"}>
-                            <div className={"ripple shadow-1-strong rounded w-100 p-3"}>
-                                {item.photoId.length === 0 ? (
-                                    <img width={"100%"} height={"200px"} src={empty} alt="1"/>
-                                ) : (
-                                    <Carous item={item} getAll={getAll}/>
-                                )}
-                                <h5 className={"text-start mt-3"}>
-                                    {item.name}
-                                </h5>
-                                <h5 className={"text-start"}>
-                                    {item.salePrice === 0 ? (
-                                        <>{item.price} so'm</>
+                        item.active ? (
+                            <div className={"col-12 col-sm-6 col-md-3 p-2"}>
+                                <div className={"ripple shadow-1-strong rounded w-100 p-3"}>
+                                    {item.photoId.length === 0 ? (
+                                        <img width={"100%"} height={"200px"} src={empty} alt="1"/>
                                     ) : (
-                                        <>
-                                            {item.price - item.salePrice} so'm
-                                            <del className={"text-danger"}> {item.price} so'm</del>
-                                        </>
+                                        <Carous item={item} getAll={getAll}/>
                                     )}
-                                </h5>
-                                <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
-                                <button className={"btn btn-primary"}><i className="bi bi-cart-check-fill"/> Savatga
-                                    saqlash
-                                </button>
+                                    <h5 className={"text-start mt-3"}>
+                                        {item.name}
+                                    </h5>
+                                    <h5 className={"text-start"}>
+                                        {item.salePrice === 0 ? (
+                                            <>{item.price} so'm</>
+                                        ) : (
+                                            <>
+                                                {item.price - item.salePrice} so'm
+                                                <del className={"text-danger"}> {item.price} so'm</del>
+                                            </>
+                                        )}
+                                    </h5>
+                                    <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
+                                    <button className={"btn btn-primary"}><i className="bi bi-cart-check-fill"/> Savatga
+                                        saqlash
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <></>
+                        )
                     ))}
                 </div>
                 <div className={"w-100 mt-3 mb-5 d-flex align-items-center justify-content-center"}>

@@ -304,10 +304,9 @@ const GetProduct = (
                         </h5>
                         <p className={"text-secondary"}>{item.description.slice(0, 28)}</p>
                         <div className={"w-100 d-flex align-items-center justify-content-between"}>
-                            <button className={"btn btn-info"}><i className="bi bi-cash"
-                                                                  onClick={() => seeDescription(item, "salePrice")}
-                                                                  data-bs-toggle="modal"
-                                                                  data-bs-target="#exampleModalSale"/></button>
+                            <button className={"btn btn-info"} onClick={() => seeDescription(item, "salePrice")}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalSale"><i className="bi bi-cash"/></button>
                             <button className={"btn btn-secondary"} data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                     onClick={() => seeDescription(item.description, "seeDescription")}><i
@@ -316,10 +315,9 @@ const GetProduct = (
                                     onClick={() => seeDescription(item, "photo")}
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModalImg"><i className="bi bi-image"/></button>
-                            <button onClick={() => seeDescription(item, "edit")} className={"btn btn-warning"}><i
-                                className="bi bi-pencil-square"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModalEdit"/></button>
+                            <button onClick={() => seeDescription(item, "edit")} data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalEdit" className={"btn btn-warning"}><i
+                                className="bi bi-pencil-square"/></button>
                             <button className={"btn btn-danger"}
                                     onClick={() => DeleteHandler(APP_API.product, item.id, getAll)}><i
                                 className="bi bi-trash"/>

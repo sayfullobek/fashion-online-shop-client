@@ -51,8 +51,8 @@ export const Category = () => {
         getAll()
     }, [])
     const deleteCategory = async (id, photoId) => {
-        await BASE_CONFIG.doDelete(APP_API.attachment, photoId)
         await DeleteHandler(APP_API.category, id, getAll)
+        await BASE_CONFIG.doDelete(APP_API.attachment, photoId)
     }
     return (
         <div>
