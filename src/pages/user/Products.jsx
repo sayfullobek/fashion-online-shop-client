@@ -2,7 +2,7 @@ import empty from "../../assets/empty.jpg";
 import {Carous} from "../../component/Carous";
 import {useState} from "react";
 
-export const Products = ({products}) => {
+export const Products = ({products, getAll}) => {
     const [see, setSee] = useState('')
     return (
         <div className={"row mt-3 m-1"}>
