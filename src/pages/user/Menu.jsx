@@ -2,20 +2,24 @@ import {GetHandler} from "../../config/service/AppService";
 import {APP_API} from "../../config/AppApi";
 import {useEffect, useState} from "react";
 import {Loading} from "../../component/Loading";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Products} from "./Products";
 
 export const Menu = () => {
     const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
+    const chatId = useParams().chatId
     const getAll = async () => {
         try {
             const product = await GetHandler(APP_API.product, "data")
             const category = await GetHandler(APP_API.category, "embedded")
-            setProducts(product)
-            setCategories(category)
-            setLoading(true)
+            const validateUser = await GetHandler(`${APP_API.getUserMeByChatId}/${chatId}`, "embedded")
+            if (validateUser.data.success === 200) {
+                setProducts(product)
+                setCategories(category)
+                setLoading(true)
+            }
         } catch (err) {
         }
     }
@@ -28,7 +32,7 @@ export const Menu = () => {
             <div className={"container"}>
                 <div className="row mt-3 m-1">
                     {categories.map(item => (
-                        <Link to={`/1/${item.id}`} className="col-lg-4 col-md-12 mb-4">
+                        <Link to={`/${chatId}/${item.id}`} className="col-lg-4 col-md-12 mb-4">
                             <div className="bg-image hover-zoom ripple shadow-1-strong rounded">
                                 <img height={"180px"} src={`${APP_API.download}${item.photoId}`}
                                      className="w-100"/>

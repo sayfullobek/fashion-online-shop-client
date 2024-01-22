@@ -17,8 +17,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={`${CLIENT_URL}/login-handler`} element={<Login/>}/>
-                <Route path={`/:chat-id`} element={<Menu/>}/>
-                <Route path={`/:chat-id/:id`} element={<CategoryItem/>}/>
+                <Route path={`/:chatId`} element={<Menu/>}/>
+                <Route path={`/:chatId/:id`} element={<CategoryItem/>}/>
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>

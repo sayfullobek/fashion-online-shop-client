@@ -26,7 +26,7 @@ export const CategoryItem = () => {
         loading ? (
             <div className={"container"}>
                 <div className={"w-100 position-absolute top-0"}>
-                    <Link to={`/${chatId}`} className={"btn btn-primary"}><i className="bi bi-box-arrow-left"/></Link>
+                    <Link to={`/${chatId}`} className={"btn btn-primary "}><i className="bi bi-box-arrow-left"/></Link>
                 </div>
                 <div className={"mt-5"}/>
                 <Products products={products} getAll={getAll}/>
