@@ -56,7 +56,7 @@ export const Products = ({products, getAll}) => {
                             {see}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
                         </div>
                     </div>
                 </div>
