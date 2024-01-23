@@ -107,7 +107,7 @@ export const Basket = () => {
                         <div className={"w-100 d-flex align-items-center justify-content-around p-3"}>
                             <button className={"btn btn-success w-50 m-1"}>{allPrice} so'm</button>
                             {path === "basket" ? (
-                                <button className={"btn btn-primary w-50 m-1"}>Buyurtma qilish <span>{size}</span>
+                                <button className={"btn btn-primary w-50 m-1"}>Buyurtma qilish
                                 </button>
                             ) : (
                                 <Link to={`/basket/${chatId}`}
