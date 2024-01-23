@@ -16,7 +16,6 @@ export const Users = () => {
     useEffect(() => {
         getAll()
     }, [])
-    console.log(users)
     return (
         <div>
             {loading ? (

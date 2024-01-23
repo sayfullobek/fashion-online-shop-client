@@ -34,6 +34,7 @@ export const GetHandler = async (api, status) => {
             return res.data._embedded.list
         }
     } catch (err) {
+        console.log(err)
     }
 }
 

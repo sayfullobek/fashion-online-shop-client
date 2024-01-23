@@ -4,9 +4,10 @@ import {useEffect, useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {Carous} from "../../component/Carous";
 import {Loading} from "../../component/Loading";
+import axios from "axios";
+import {TOKEN} from "../../utils/Utils";
 
 export const Basket = () => {
-    // const navigate = useNavigate
     const [basket, setBasket] = useState({})
     const [loading, setLoading] = useState(false)
     const chatId = useParams().chatId
@@ -22,22 +23,20 @@ export const Basket = () => {
             setSize(res.productBaskets.length)
             setLoading(true)
         } catch (err) {
-
         }
     }
+
     useEffect(() => {
         getAll()
     }, [])
+
     const close = async () => {
-        const res = await GetHandler(`${APP_API.sendMsg}/${chatId}`, "data")
+        const res = await axios.get(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
+            item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
+        ))}%50Umumiy narxi = ${basket.allPrice}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`)
         if (res.status === 200) {
             window.location.href = "https://t.me/onlien_fashion_bot"
         }
-        // window.location.href = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
-        //     item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
-        // ))}\n\n\nUmumiy narxi = ${basket.allPrice}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
-        // window.close();
-
     }
     return (
         <div>
@@ -48,8 +47,8 @@ export const Basket = () => {
                             className="bi bi-box-arrow-left"/></Link>
                     </div>
                     {basket.productBaskets.length === 0 ? (
-                        <h1 className={"text-center text-primary"}>Hozircha savatda hech qanday mahsulot mavjud
-                            emas</h1>
+                        <h1 className={"text-center text-danger mt-5"}>Hozircha savatda hech qanday mahsulot mavjud
+                            emas...</h1>
                     ) : (
                         <>
                             <div className={"mt-5"}/>
@@ -69,7 +68,8 @@ export const Basket = () => {
                                                     style={{fontSize: '10px'}}>X</span>{item.size}</span></>
                                             ) : (
                                                 <>
-                                                    <del className={"text-danger"}> {item.product[0].price} so'm</del>
+                                                    <del className={"text-danger"}> {item.product[0].price} so'm
+                                                    </del>
                                                     <h3>{item.product[0].price - item.product[0].salePrice} so'm <span
                                                         style={{fontSize: '16px'}}
                                                         className={"text-success"}><span
@@ -120,7 +120,7 @@ export const Basket = () => {
                             <button className={"btn btn-success w-50 m-1"}>{allPrice} so'm</button>
                             {path === "basket" ? (
                                 <button onClick={() => close()}
-                                        className={"btn btn-primary w-50 m-1"}>Buyurtma
+                                        className={basket.productBaskets.length === 0 ? "btn btn-primary w-50 m-1 disabled" : "btn btn-primary w-50 m-1"}>Buyurtma
                                     qilish
                                 </button>
                             ) : (
