@@ -1,12 +1,21 @@
 import empty from "../../assets/empty.jpg";
 import {Carous} from "../../component/Carous";
 import {useState} from "react";
+import {EditHandler} from "../../config/service/AppService";
+import {APP_API} from "../../config/AppApi";
 
-export const Products = ({products, getAll}) => {
+export const Products = ({products, getAll, chatId}) => {
     const [see, setSee] = useState('')
     const [item, setItem] = useState({})
     const [nowPrice, setNowPrice] = useState(0)
     const [buyPrice, setBuyPrice] = useState(0)
+
+    const saveBasket = async () => {
+        const sizeProduct = nowPrice / buyPrice;
+        const data = {oneProduct: item.id, sizeProduct}
+        await EditHandler(chatId, APP_API.saveBasket, data)
+    }
+
     return (
         <div className={"row mt-3 m-1"}>
             {products.map(item => (
@@ -138,7 +147,7 @@ export const Products = ({products, getAll}) => {
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal"><i
-                                className="bi bi-cart-check-fill"/> Savatga saqlash
+                                className="bi bi-cart-check-fill" onClick={() => saveBasket()}/> Savatga saqlash
                             </button>
                         </div>
                     </div>

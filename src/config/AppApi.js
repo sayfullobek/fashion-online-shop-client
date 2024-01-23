@@ -5,6 +5,7 @@ export const APP_API = {
     users: '/auth/users',
     getUserMe: "/auth/get-user-me",
     getUserMeByChatId: "/auth/chat-id",
+    saveBasket: "/auth/basket-save",
     upload: "/attachment/upload",
     download: `${SERVER_URL}/attachment/download?id=`,
     category: "/category",
