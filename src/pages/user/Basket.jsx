@@ -33,7 +33,7 @@ export const Basket = () => {
     const close = async () => {
         const res = await axios.get(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
             item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
-        ))}%50Umumiy narxi = ${basket.allPrice}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`)
+        ))}%20Umumiy narxi = ${basket.allPrice}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`)
         if (res.status === 200) {
             window.location.href = "https://t.me/onlien_fashion_bot"
         }
