@@ -91,18 +91,20 @@ export const Products = ({products, getAll}) => {
                                     ) : (
                                         <>
                                             <del className={"text-danger"}> {item.price} so'm</del>
-                                            <h3>{item.price - item.salePrice} so'm <span style={{fontSize:'16px'}} className={"text-success"}><span style={{fontSize:'10px'}}>X</span>{nowPrice/buyPrice}</span></h3>
+                                            <h3>{item.price - item.salePrice} so'm <span style={{fontSize: '16px'}}
+                                                                                         className={"text-success"}><span
+                                                style={{fontSize: '10px'}}>X</span>{nowPrice / buyPrice}</span></h3>
                                         </>
                                     )}
                                     <div style={{width: "100%"}}
                                          className={"d-flex align-items-center justify-content-between"}>
                                         <button
-                                            className={nowPrice === (item.price - item.salePrice) ? "btn btn-secondary p-5 pt-1 pb-1 disabled" : "btn btn-danger p-5 pt-1 pb-1"}
+                                            className={nowPrice === (item.price - item.salePrice) ? "btn btn-secondary disabled" : "btn btn-danger"}
                                             onClick={() => {
                                                 setNowPrice(nowPrice - buyPrice)
                                             }}>-
                                         </button>
-                                        <button className={"btn btn-success p-5 pt-1 pb-1"} onClick={() => {
+                                        <button className={"btn btn-success"} onClick={() => {
                                             setNowPrice(nowPrice + buyPrice)
                                         }}>+
                                         </button>
