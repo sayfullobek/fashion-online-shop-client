@@ -36,8 +36,13 @@ export const Products = ({products, getAll}) => {
                                 <button data-bs-toggle="modal" className={"btn btn-primary"}
                                         data-bs-target="#exampleModalBasket" onClick={() => {
                                     setItem(item)
-                                    setNowPrice(item.price - item.salePrice)
-                                    setBuyPrice(item.price - item.salePrice)
+                                    if (item.salePrice) {
+                                        setNowPrice(item.price - item.salePrice)
+                                        setBuyPrice(item.price - item.salePrice)
+                                    } else {
+                                        setNowPrice(item.price)
+                                        setBuyPrice(item.price)
+                                    }
                                 }}><i
                                     className="bi bi-cart-check-fill"/> Savatga
                                     saqlash
@@ -98,16 +103,33 @@ export const Products = ({products, getAll}) => {
                                     )}
                                     <div style={{width: "100%"}}
                                          className={"d-flex align-items-center justify-content-between"}>
-                                        <button
-                                            className={nowPrice === (item.price - item.salePrice) ? "btn btn-secondary disabled" : "btn btn-danger"}
-                                            onClick={() => {
-                                                setNowPrice(nowPrice - buyPrice)
-                                            }}>-
-                                        </button>
-                                        <button className={"btn btn-success"} onClick={() => {
-                                            setNowPrice(nowPrice + buyPrice)
-                                        }}>+
-                                        </button>
+                                        {item.salePrice ? (
+                                            <>
+                                                <button
+                                                    className={nowPrice === (item.price - item.salePrice) ? "btn btn-secondary disabled" : "btn btn-danger"}
+                                                    onClick={() => {
+                                                        setNowPrice(nowPrice - buyPrice)
+                                                    }}>-
+                                                </button>
+                                                <button className={"btn btn-success"} onClick={() => {
+                                                    setNowPrice(nowPrice + buyPrice)
+                                                }}>+
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button
+                                                    className={nowPrice === (item.price) ? "btn btn-secondary disabled" : "btn btn-danger"}
+                                                    onClick={() => {
+                                                        setNowPrice(nowPrice - buyPrice)
+                                                    }}>-
+                                                </button>
+                                                <button className={"btn btn-success"} onClick={() => {
+                                                    setNowPrice(nowPrice + buyPrice)
+                                                }}>+
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                     <h4 className={"text-success mt-3"}>{nowPrice}</h4>
                                 </div>
