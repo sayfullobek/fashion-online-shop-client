@@ -12,7 +12,7 @@ export const Dashboard = () => {
         <>
             <div className={"row col-12"}>
                 {arr.map(item => (
-                    <div className="col-3">
+                    <div className="col-3 col-md-6 col-sm-12">
                         <div className="card col-12">
                             <h5 className="card-header">{item.name}</h5>
                             <div className="card-body">
