@@ -3,17 +3,20 @@ import {Carous} from "../../component/Carous";
 import {useState} from "react";
 import {EditHandler} from "../../config/service/AppService";
 import {APP_API} from "../../config/AppApi";
+import {useNavigate} from 'react-router-dom'
 
 export const Products = ({products, getAll, chatId}) => {
     const [see, setSee] = useState('')
     const [item, setItem] = useState({})
     const [nowPrice, setNowPrice] = useState(0)
     const [buyPrice, setBuyPrice] = useState(0)
+    const navigate = useNavigate()
 
     const saveBasket = async () => {
         const sizeProduct = nowPrice / buyPrice;
         const data = {oneProduct: item.id, sizeProduct}
         await EditHandler(chatId, APP_API.saveBasket, data)
+        navigate(`/${chatId}`)
     }
 
     return (
@@ -146,7 +149,7 @@ export const Products = ({products, getAll, chatId}) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
-                            <button type="button"  onClick={() => saveBasket()} className="btn btn-primary"><i
+                            <button type="button" onClick={() => saveBasket()} className="btn btn-primary"><i
                                 className="bi bi-cart-check-fill"/> Savatga saqlash
                             </button>
                         </div>
