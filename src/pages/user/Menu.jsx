@@ -14,8 +14,8 @@ export const Menu = () => {
         try {
             const product = await GetHandler(APP_API.product, "data")
             const category = await GetHandler(APP_API.category, "embedded")
-            const validateUser = await GetHandler(`${APP_API.getUserMeByChatId}/${chatId}`, "embedded")
-            if (validateUser.data.success === 200) {
+            const validateUser = await GetHandler(`${APP_API.getUserMeByChatId}/${chatId}`, "data")
+            if (validateUser.status === 200) {
                 setProducts(product)
                 setCategories(category)
                 setLoading(true)
