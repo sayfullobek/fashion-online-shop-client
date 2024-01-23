@@ -42,7 +42,7 @@ export const Basket = () => {
                         <>
                             <div className={"mt-5"}/>
                             {basket.productBaskets.map(item => (
-                                <div className="card w-100 p-2" style={{height: '16vh'}}>
+                                <div className="card w-100 p-2" style={{height: '20%'}}>
                                     <div className={"w-100 d-flex align-items-center justify-content-between"}>
                                         <div className={"w-50"}>
                                             <Carous item={item.product[0]} getAll={getAll} status={"user"}/>

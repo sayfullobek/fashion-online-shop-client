@@ -47,7 +47,7 @@ export const Carous = ({item, getAll, status}) => {
                             <img
                                 style={{
                                     display: 'block',
-                                    height: path==="basket"?"14vh":'29vh',
+                                    height: path==="basket"?"94%":'29vh',
                                     margin: 'auto',
                                     width: '100%'
                                 }}
