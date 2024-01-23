@@ -6,7 +6,7 @@ import {Carous} from "../../component/Carous";
 import {Loading} from "../../component/Loading";
 
 export const Basket = () => {
-    const navigate = useNavigate
+    // const navigate = useNavigate
     const [basket, setBasket] = useState({})
     const [loading, setLoading] = useState(false)
     const chatId = useParams().chatId
