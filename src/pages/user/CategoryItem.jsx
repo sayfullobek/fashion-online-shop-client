@@ -5,7 +5,7 @@ import {Loading} from "../../component/Loading";
 import {Link, useParams} from 'react-router-dom'
 import {Products} from "./Products";
 
-export const CategoryItem = () => {
+export const CategoryItem = ({getBasket}) => {
     const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
     const param = useParams().id
@@ -25,11 +25,11 @@ export const CategoryItem = () => {
     return (
         loading ? (
             <div className={"container"}>
-                <div className={"w-100 position-fixed top-0 mt-1"} style={{zIndex:'10000'}}>
+                <div className={"w-100 position-fixed top-0 mt-1"} style={{zIndex: '10000'}}>
                     <Link to={`/${chatId}`} className={"btn btn-primary "}><i className="bi bi-box-arrow-left"/></Link>
                 </div>
                 <div className={"mt-5"}/>
-                <Products products={products} getAll={getAll} chatId={chatId}/>
+                <Products products={products} getAll={getAll} chatId={chatId} getBasket={getBasket}/>
             </div>
         ) : (
             <Loading/>

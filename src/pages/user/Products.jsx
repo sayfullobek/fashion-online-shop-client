@@ -5,7 +5,7 @@ import {EditHandler} from "../../config/service/AppService";
 import {APP_API} from "../../config/AppApi";
 import {useNavigate} from 'react-router-dom'
 
-export const Products = ({products, getAll, chatId}) => {
+export const Products = ({products, getAll, chatId, getBasket}) => {
     const [see, setSee] = useState('')
     const [item, setItem] = useState({})
     const [nowPrice, setNowPrice] = useState(0)
@@ -17,6 +17,7 @@ export const Products = ({products, getAll, chatId}) => {
         const data = {oneProduct: item.id, sizeProduct}
         await EditHandler(chatId, APP_API.saveBasket, data)
         navigate(`/${chatId}`)
+        await getBasket()
     }
 
     return (

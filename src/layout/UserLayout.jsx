@@ -1,25 +1,7 @@
-import {Link, Outlet, useLocation, useParams} from 'react-router-dom'
-import {useEffect, useState} from "react";
-import {GetHandler} from "../config/service/AppService";
-import {APP_API} from "../config/AppApi";
+import {Link, Outlet, useLocation} from 'react-router-dom'
 
-export const UserLayout = () => {
+export const UserLayout = ({chatId, allPrice, size, getAll}) => {
     const path = useLocation().pathname.split('/')[1]
-    const chatId = useParams().chatId
-    const [allPrice, setAllPrice] = useState(0)
-    const [size, setSize] = useState(0)
-    const getAll = async () => {
-        try {
-            const res = await GetHandler(`${APP_API.getBasket}/${chatId}`, "data")
-            setAllPrice(res.allPrice)
-            setSize(res.productBaskets.length)
-        } catch (err) {
-
-        }
-    }
-    useEffect(() => {
-        getAll()
-    }, [])
     return (
         <div className={"w-100"}>
             <Outlet/>

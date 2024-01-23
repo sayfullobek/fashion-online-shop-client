@@ -5,7 +5,7 @@ import {Loading} from "../../component/Loading";
 import {Link, useParams} from "react-router-dom";
 import {Products} from "./Products";
 
-export const Menu = () => {
+export const Menu = ({getBasket}) => {
     const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
@@ -52,7 +52,7 @@ export const Menu = () => {
                         </Link>
                     ))}
                 </div>
-                <Products products={products} getAll={getAll} chatId={chatId}/>
+                <Products products={products} getAll={getAll} chatId={chatId} getBasket={getBasket}/>
                 <div className={"w-100 mt-3 mb-5 d-flex align-items-center justify-content-center"}>
                     <button className={"btn btn-secondary w-25"}>Yana ko'proq...</button>
                 </div>
