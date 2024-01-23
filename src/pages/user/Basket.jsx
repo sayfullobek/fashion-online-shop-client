@@ -30,10 +30,8 @@ export const Basket = () => {
     }, [])
     const close = () => {
         window.location.href = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
-            item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice))
-        ))}"
-        
-        Umumiy narxi = " + basket.allPrice&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
+            item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
+        ))}"\n\n\nUmumiy narxi = " + basket.allPrice&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
         window.location.href = "https://t.me/onlien_fashion_bot"
     }
     return (
