@@ -5,7 +5,7 @@ import {EditHandler} from "../../config/service/AppService";
 import {APP_API} from "../../config/AppApi";
 import {useNavigate} from 'react-router-dom'
 
-export const Products = ({products, getAll, chatId, getBasket}) => {
+export const Products = ({products, getAll, chatId}) => {
     const [see, setSee] = useState('')
     const [item, setItem] = useState({})
     const [nowPrice, setNowPrice] = useState(0)
