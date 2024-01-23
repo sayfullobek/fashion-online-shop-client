@@ -12,12 +12,13 @@ export const Dashboard = () => {
         <>
             <div className={"row col-12"}>
                 {arr.map(item => (
-                    <div className="col-3 col-md-6 col-sm-12">
+                    <div className="col-12 col-md-6 col-sm-12 col-xl-3">
                         <div className="card col-12">
                             <h5 className="card-header">{item.name}</h5>
                             <div className="card-body">
                                 <h6 className="card-title">{item.name}ning soni {item.size}ta</h6>
-                                <Link to={`${CLIENT_URL}${item.link}`} className="btn btn-primary" data-mdb-ripple-init>Batafsil</Link>
+                                <Link to={`${CLIENT_URL}${item.link}`} className="btn btn-primary"
+                                      data-mdb-ripple-init>Batafsil</Link>
                             </div>
                         </div>
                     </div>
