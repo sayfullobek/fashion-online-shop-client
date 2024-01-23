@@ -36,19 +36,18 @@ export const Requests = () => {
                         </thead>
                         <tbody>
                         {requests.map((item, i) => (
-                            item.roles[0].roleName === "USER" ? (
-                                <tr>
-                                    <td>{i + 1}</td>
-                                    <td>{item.id}</td>
-                                    <td>{item.phoneNumber}</td>
-                                    <td>{item.users.botFirstName}</td>
-                                    <td>{item.users.botLastName}</td>
-                                    <td>{item.users.botUsername}</td>
-                                    <td>{item.createdAt.substring(0, 10)} / {item.createdAt.substring(11, 19)}</td>
-                                </tr>
-                            ) : (
-                                <></>
-                            )
+                            <tr>
+                                <td>{i + 1}</td>
+                                <td>{item.tr}</td>
+                                <td>{item.phoneNumber}</td>
+                                <td>{item.users.botFirstName}</td>
+                                <td>{item.users.botLastName}</td>
+                                <td>{item.users.botUsername}</td>
+                                <td>{item.createdAt.substring(0, 10)} / {item.createdAt.substring(11, 19)}</td>
+                                <td>
+                                    <button className={"btn btn-primary"}>Ba'tafsil</button>
+                                </td>
+                            </tr>
                         ))}
                         </tbody>
                     </table>
