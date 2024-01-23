@@ -4,6 +4,7 @@ export const APP_API = {
     login: '/auth/login',
     users: '/auth/users',
     getUserMe: "/auth/get-user-me",
+    sendMsg: "/auth/send-message",
     getUserMeByChatId: "/auth/chat-id",
     saveBasket: "/auth/basket-save",
     getBasket: "/auth/get-basket/by-chat-id",

@@ -4,9 +4,9 @@ import {useEffect, useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {Carous} from "../../component/Carous";
 import {Loading} from "../../component/Loading";
-import {TOKEN} from "../../utils/Utils";
 
 export const Basket = () => {
+    const navigate = useNavigate
     const [basket, setBasket] = useState({})
     const [loading, setLoading] = useState(false)
     const chatId = useParams().chatId
@@ -28,12 +28,16 @@ export const Basket = () => {
     useEffect(() => {
         getAll()
     }, [])
-    const close = () => {
-        window.location.href = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
-            item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
-        ))}"\n\n\nUmumiy narxi = " + basket.allPrice&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
-        // window.location.href = "https://t.me/onlien_fashion_bot"
-        window.close();
+    const close = async () => {
+        const res = await GetHandler(`${APP_API.sendMsg}/${chatId}`, "data")
+        if (res.status === 200) {
+            window.location.href = "https://t.me/onlien_fashion_bot"
+        }
+        // window.location.href = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
+        //     item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice)) + "\n"
+        // ))}\n\n\nUmumiy narxi = ${basket.allPrice}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
+        // window.close();
+
     }
     return (
         <div>
