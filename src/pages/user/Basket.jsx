@@ -28,6 +28,9 @@ export const Basket = () => {
     useEffect(() => {
         getAll()
     }, [])
+    const close = () => {
+        window.close()
+    }
     return (
         <div>
             {loading ? (
@@ -108,12 +111,12 @@ export const Basket = () => {
                         <div className={"w-100 d-flex align-items-center justify-content-around p-3"}>
                             <button className={"btn btn-success w-50 m-1"}>{allPrice} so'm</button>
                             {path === "basket" ? (
-                                <a href={`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
-                                    item.product[0].name + " " + item.size + "X" + (item.product[0].price - item.product[0].salePrice) + " = " + (item * size * (item.product[0].price - item.product[0].salePrice)) + "" +
+                                <a onClick={() => close()}
+                                   href={`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${basket.productBaskets.map(item => (
+                                       item.product[0].name + " " + item.size + " X " + (item.product[0].price - item.product[0].salePrice) + " = " + (item.size * (item.product[0].price - item.product[0].salePrice))
+                                   ))}+"" +
                                     "" +
-                                    "" +
-                                    "Umumiy narxi = " + basket.allPrice
-                                ))}&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman ${chatId}"}]]}`}
+                                    "Umumiy narxi = " + basket.allPrice&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman ${chatId}"}]]}`}
                                    className={"btn btn-primary w-50 m-1"}>Buyurtma
                                     qilish
                                 </a>
