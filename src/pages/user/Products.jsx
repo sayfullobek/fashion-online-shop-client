@@ -17,7 +17,7 @@ export const Products = ({products, getAll, chatId}) => {
         const data = {oneProduct: item.id, sizeProduct}
         await EditHandler(chatId, APP_API.saveBasket, data)
         navigate(`/${chatId}`)
-        await getBasket()
+        await getAll()
     }
 
     return (
