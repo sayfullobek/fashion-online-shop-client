@@ -21,7 +21,6 @@ export const EditHandler = async (id, api, data) => {
             toast.success("Muvaffaqiyatli Taxrirlandi")
         }
     } catch (err) {
-        console.log(err)
         toast.error("Taxrirlashda xatolik")
     }
 }

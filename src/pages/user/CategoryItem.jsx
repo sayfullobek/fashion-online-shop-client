@@ -25,11 +25,11 @@ export const CategoryItem = () => {
     return (
         loading ? (
             <div className={"container"}>
-                <div className={"w-100 position-absolute top-0"}>
+                <div className={"w-100 position-fixed top-0 mt-1"} style={{zIndex:'10000'}}>
                     <Link to={`/${chatId}`} className={"btn btn-primary "}><i className="bi bi-box-arrow-left"/></Link>
                 </div>
                 <div className={"mt-5"}/>
-                <Products products={products} getAll={getAll}/>
+                <Products products={products} getAll={getAll} chatId={chatId}/>
             </div>
         ) : (
             <Loading/>

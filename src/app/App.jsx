@@ -11,14 +11,19 @@ import {Settings} from "../pages/Settings";
 import {Menu} from "../pages/user/Menu";
 import {CategoryItem} from "../pages/user/CategoryItem";
 import {Users} from "../pages/Users";
+import {Basket} from "../pages/user/Basket";
+import {UserLayout} from "../layout/UserLayout";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={`${CLIENT_URL}/login-handler`} element={<Login/>}/>
-                <Route path={`/:chatId`} element={<Menu/>}/>
-                <Route path={`/:chatId/:id`} element={<CategoryItem/>}/>
+                <Route element={<UserLayout/>}>
+                    <Route path={`/:chatId`} element={<Menu/>}/>
+                    <Route path={`/:chatId/:id`} element={<CategoryItem/>}/>
+                    <Route path={`/basket/:chatId`} element={<Basket/>}/>
+                </Route>
                 <Route path={CLIENT_URL} element={<DashboardLayout/>}>
                     <Route index element={<Dashboard/>}/>
                     <Route path={`${CLIENT_URL}/category`} element={<Category/>}/>

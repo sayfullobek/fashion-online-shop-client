@@ -52,7 +52,7 @@ export const Menu = () => {
                         </Link>
                     ))}
                 </div>
-                <Products products={products} getAll={getAll}/>
+                <Products products={products} getAll={getAll} chatId={chatId}/>
                 <div className={"w-100 mt-3 mb-5 d-flex align-items-center justify-content-center"}>
                     <button className={"btn btn-secondary w-25"}>Yana ko'proq...</button>
                 </div>

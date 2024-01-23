@@ -2,8 +2,10 @@ import Carousel from "react-multi-carousel";
 import {APP_API} from "../config/AppApi";
 import {RESPONSIVE} from "../utils/Utils";
 import {DeleteHandler} from "../config/service/AppService";
+import {useLocation} from "react-router-dom";
 
 export const Carous = ({item, getAll, status}) => {
+    const path = useLocation().pathname.split('/')[1]
     return (
         item ? (
             <Carousel
@@ -45,7 +47,7 @@ export const Carous = ({item, getAll, status}) => {
                             <img
                                 style={{
                                     display: 'block',
-                                    height: '29vh',
+                                    height: path==="basket"?"14vh":'29vh',
                                     margin: 'auto',
                                     width: '100%'
                                 }}

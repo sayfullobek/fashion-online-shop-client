@@ -110,7 +110,7 @@ export const Products = ({products, getAll, chatId}) => {
                                                 style={{fontSize: '10px'}}>X</span>{nowPrice / buyPrice}</span></h3>
                                         </>
                                     )}
-                                    <div style={{width: "100%"}}
+                                    <div style={{width: "60%"}}
                                          className={"d-flex align-items-center justify-content-between"}>
                                         {item.salePrice ? (
                                             <>
@@ -146,8 +146,8 @@ export const Products = ({products, getAll, chatId}) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yopish</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal"><i
-                                className="bi bi-cart-check-fill" onClick={() => saveBasket()}/> Savatga saqlash
+                            <button type="button"  onClick={() => saveBasket()} className="btn btn-primary"><i
+                                className="bi bi-cart-check-fill"/> Savatga saqlash
                             </button>
                         </div>
                     </div>
