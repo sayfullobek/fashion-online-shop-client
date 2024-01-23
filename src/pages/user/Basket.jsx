@@ -34,7 +34,7 @@ export const Basket = () => {
         ))}"
         
         Umumiy narxi = " + basket.allPrice&reply_markup={"inline_keyboard":%20[[{"text":%20"Tasdiqlash ✅",%20"callback_data":%20"sotib olaman : ${chatId}"}]]}`
-        window.location.href = "https://t.me/online_fashion_bot"
+        window.location.href = "https://t.me/onlien_fashion_bot"
     }
     return (
         <div>
