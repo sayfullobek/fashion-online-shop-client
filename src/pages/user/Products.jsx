@@ -1,24 +1,24 @@
 import empty from "../../assets/empty.jpg";
 import {Carous} from "../../component/Carous";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {EditHandler} from "../../config/service/AppService";
 import {APP_API} from "../../config/AppApi";
-import {useNavigate} from 'react-router-dom'
 
 export const Products = ({products, getAll, chatId}) => {
     const [see, setSee] = useState('')
     const [item, setItem] = useState({})
     const [nowPrice, setNowPrice] = useState(0)
     const [buyPrice, setBuyPrice] = useState(0)
-    const navigate = useNavigate()
 
     const saveBasket = async () => {
         const sizeProduct = nowPrice / buyPrice;
         const data = {oneProduct: item.id, sizeProduct}
         await EditHandler(chatId, APP_API.saveBasket, data)
-        navigate(`/${chatId}`)
         await getAll()
     }
+    useEffect(() => {
+        getAll()
+    }, [])
 
     return (
         <div className={"row mt-3 m-1"}>
