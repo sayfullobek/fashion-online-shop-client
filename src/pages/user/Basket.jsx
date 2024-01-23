@@ -107,8 +107,9 @@ export const Basket = () => {
                         <div className={"w-100 d-flex align-items-center justify-content-around p-3"}>
                             <button className={"btn btn-success w-50 m-1"}>{allPrice} so'm</button>
                             {path === "basket" ? (
-                                <button className={"btn btn-primary w-50 m-1"}>Buyurtma qilish
-                                </button>
+                                <a href={"https://t.me/onlien_fashion_bot"} className={"btn btn-primary w-50 m-1"}>Buyurtma
+                                    qilish
+                                </a>
                             ) : (
                                 <Link to={`/basket/${chatId}`}
                                       className={"btn btn-primary w-50 m-1"}>Savatcha <span>{size}</span></Link>
